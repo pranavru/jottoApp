@@ -1,5 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
+/* eslint-disable react/require-default-props */
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const GuessedWord = ({ guessedWords }) => {
   let content;
@@ -10,7 +11,28 @@ const GuessedWord = ({ guessedWords }) => {
       </p>
     );
   } else {
-    content = (<></>);
+    const guessedWordsRow = guessedWords.map(({ guessedWord, letterMatchCount }) => (
+      <tr data-test="guessed-word" key={guessedWord}>
+        <td>{guessedWord}</td>
+        <td>{letterMatchCount}</td>
+      </tr>
+    ));
+    content = (
+      <div data-test="guessed-words-table">
+        <h3>Guessed Words</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Guess</th>
+              <th>Matching Letters</th>
+            </tr>
+          </thead>
+          <tbody>
+            {guessedWordsRow}
+          </tbody>
+        </table>
+      </div>
+    );
   }
   return (
     <div data-test="component-guessed-words">
@@ -25,14 +47,6 @@ GuessedWord.propTypes = {
       letterMatchCount: PropTypes.number.isRequired,
     }),
   ),
-};
-GuessedWord.defaultProps = {
-  guessedWords: [
-    {
-      guessedWord: "train",
-      letterMatchCount: 0,
-    },
-  ],
 };
 
 export default GuessedWord;
