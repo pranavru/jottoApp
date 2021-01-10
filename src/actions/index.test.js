@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import actionTypes, { correctGuess } from './index';
+import actionTypes, { correctGuess } from '.';
 
 describe('correctGuess() Method', () => {
   test('should return an action type with "CORRECT_GUESS" ', () => {
