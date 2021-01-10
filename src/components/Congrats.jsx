@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} - Renderend Component (or null if `success` prop is false)
  */
 const Congrats = ({ success }) => (success ? (
-  <div data-test="component-congrats">
-    <span data-test="congrats-message">
+  <div data-test="component-congrats" className="container">
+    <span data-test="congrats-message" className="alert alert-success">
       Congratulations! You guessed the word!
     </span>
   </div>

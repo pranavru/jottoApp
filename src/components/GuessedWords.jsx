@@ -11,18 +11,23 @@ const GuessedWord = ({ guessedWords }) => {
       </p>
     );
   } else {
-    const guessedWordsRow = guessedWords.map(({ guessedWord, letterMatchCount }) => (
-      <tr data-test="guessed-word" key={guessedWord}>
-        <td>{guessedWord}</td>
-        <td>{letterMatchCount}</td>
-      </tr>
-    ));
+    const guessedWordsRow = guessedWords.map(
+      ({ guessedWord, letterMatchCount }, index) => (
+        <tr data-test="guessed-word" key={guessedWord}>
+          <td>{index + 1}</td>
+          <td>{guessedWord}</td>
+          <td>{letterMatchCount}</td>
+        </tr>
+      ),
+    );
+
     content = (
-      <div data-test="guessed-words-table">
-        <h3>Guessed Words</h3>
-        <table>
-          <thead>
+      <div data-test="guessed-words-table" className="container">
+        <h2>Guessed Words</h2>
+        <table className="table table-sm">
+          <thead className="thead-light">
             <tr>
+              <th>#</th>
               <th>Guess</th>
               <th>Matching Letters</th>
             </tr>
