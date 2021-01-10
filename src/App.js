@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
-import './App.css';
 import Congrats from './components/Congrats';
 import GuessedWord from './components/GuessedWords';
+
+import './App.css';
 
 class App extends Component {
   constructor(props) {
