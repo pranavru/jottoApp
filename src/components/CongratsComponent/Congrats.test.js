@@ -4,7 +4,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Congrats from './Congrats';
-import { checkPropAttr, findByTestAttr } from '../test/testUtils';
+import { checkPropAttr, findByTestAttr } from '../../test/testUtils';
 
 describe('Congrats Components', () => {
   const defaultProps = { success: false };

@@ -7,7 +7,7 @@ import './index.css';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './reducers/configureStore';
+import store from './configureStore';
 
 require('bootstrap/dist/css/bootstrap.min.css');
 

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
-import Congrats from './components/Congrats';
-import GuessedWord from './components/GuessedWords';
+import Congrats from './components/CongratsComponent/Congrats';
+import GuessedWord from './components/GuessedWordComponent/GuessedWords';
 
 import './App.css';
 
