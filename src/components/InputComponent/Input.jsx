@@ -12,7 +12,11 @@ class InputComp extends Component {
   render() {
     const { success } = this.props;
     const contents = success ? null : (
-      <form action="" className="form-inline">
+      <form
+        action=""
+        data-test="component-form-container"
+        className="form-horizontal"
+      >
         <input
           type="text"
           data-test="component-input-box"
@@ -29,7 +33,7 @@ class InputComp extends Component {
       </form>
     );
     return (
-      <div className="container" data-test="component-input">
+      <div data-test="component-input">
         {contents}
       </div>
     );
