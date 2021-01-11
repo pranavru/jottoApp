@@ -15,14 +15,24 @@ const setup = (initialState = {}) => {
 
 describe('Input Component: ', () => {
   describe('When word has not been guessed:', () => {
-    test('should render component without error', () => {
+    let wrapper;
 
+    beforeEach(() => {
+      const initialState = { success: false };
+      wrapper = setup(initialState);
+    });
+
+    test('should render component without error', () => {
+      const component = findByTestAttr(wrapper, 'component-input');
+      expect(component.length).toBe(1);
     });
     test('should render input box', () => {
-
+      const component = findByTestAttr(wrapper, 'component-input-box');
+      expect(component.length).toBe(1);
     });
     test('should render submit button', () => {
-
+      const component = findByTestAttr(wrapper, 'component-submit-button');
+      expect(component.length).toBe(1);
     });
   });
   describe('word has been guessed', () => {
