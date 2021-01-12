@@ -2,7 +2,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/forbid-foreign-prop-types */
 import checkPropTypes from 'check-prop-types';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { middleWares } from '../configureStore';
 
 import rootReducer from '../reducers';
 
@@ -13,7 +14,10 @@ import rootReducer from '../reducers';
  * @param  {object} initialState - Initial State for the store.
  * @returns {Store} - Redux store
  */
-export const storeFactory = (initialState) => createStore(rootReducer, initialState);
+export const storeFactory = (initialState) => {
+  const createStoreWithMiddlewares = applyMiddleware(...middleWares)(createStore);
+  return createStoreWithMiddlewares(rootReducer, initialState);
+};
 
 /**
  * Return node(s) with the given data-test attribute.
