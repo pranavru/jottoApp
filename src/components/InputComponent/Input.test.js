@@ -6,8 +6,6 @@ import { shallow } from 'enzyme';
 
 import { findByTestAttr, storeFactory } from '../../test/testUtils';
 import InputComp from './Input';
-import { guessWord } from '../../actions';
-import { func } from 'prop-types';
 
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
