@@ -12,6 +12,7 @@ import { getSecretWord } from './actions';
 
 export class UnconnectedApp extends React.Component {
   componentDidMount() {
+    // eslint-disable-next-line no-shadow
     const { getSecretWord } = this.props;
     getSecretWord();
   }

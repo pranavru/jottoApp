@@ -11,9 +11,10 @@ import { guessWord } from '../../actions';
  */
 const mapStateToProps = ({ success }) => ({ success });
 
-class InputComp extends Component {
+export class UnconnectedInputComp extends Component {
   render() {
-    const { success } = this.props;
+    // eslint-disable-next-line no-shadow
+    const { success, guessWord } = this.props;
     const contents = success ? null : (
       <form
         action=""
@@ -30,6 +31,7 @@ class InputComp extends Component {
           type="submit"
           data-test="component-submit-button"
           className="btn btn-primary mb-2"
+          onClick={() => guessWord('Party')}
         >
           Submit
         </button>
@@ -42,8 +44,13 @@ class InputComp extends Component {
     );
   }
 }
-InputComp.propTypes = {
-  success: PropTypes.bool.isRequired,
+UnconnectedInputComp.propTypes = {
+  success: PropTypes.bool,
+  guessWord: PropTypes.func,
+};
+UnconnectedInputComp.defaultProps = {
+  success: false,
+  guessWord: () => { },
 };
 
-export default connect(mapStateToProps, { guessWord })(InputComp);
+export default connect(mapStateToProps, { guessWord })(UnconnectedInputComp);

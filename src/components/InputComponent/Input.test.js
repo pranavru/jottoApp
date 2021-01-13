@@ -5,7 +5,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { findByTestAttr, storeFactory } from '../../test/testUtils';
-import InputComp from './Input';
+import InputComp, { UnconnectedInputComp } from './Input';
 
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
@@ -67,5 +67,24 @@ describe('redux props', () => {
     const wrapper = setup();
     const props = wrapper.instance().props.guessWord;
     expect(props).toBeInstanceOf(Function);
+  });
+});
+describe('guessWord action creator calls', () => {
+  test('should invoke action props (guessWord) when the Submit Button is clicked', () => {
+    const guessWordMock = jest.fn();
+    const props = {
+      success: false,
+      guessWord: guessWordMock,
+    };
+
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    const wrapper = shallow(<UnconnectedInputComp {...props} />);
+
+    // Find the submit button from the DOM and perform click functionality
+    findByTestAttr(wrapper, 'component-submit-button').simulate('click');
+
+    // Look for the mock Function call count
+    const guessWordMockCallCount = guessWordMock.mock.calls.length;
+    expect(guessWordMockCallCount).toBeGreaterThan(0);
   });
 });
