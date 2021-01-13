@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { guessWord } from '../../actions';
+
 /**
  * @function mapStateToProps
  * @param {*} state - has the state of the entire application.
@@ -43,4 +46,4 @@ InputComp.propTypes = {
   success: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps)(InputComp);
+export default connect(mapStateToProps, { guessWord })(InputComp);
