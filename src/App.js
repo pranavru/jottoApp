@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Congrats from './components/CongratsComponent/Congrats';
 import GuessedWord from './components/GuessedWordComponent/GuessedWords';
+import InputComp from './components/InputComponent/Input';
 
 import './App.css';
 import { getSecretWord } from './actions';
 
-class App extends React.Component {
+export class UnconnectedApp extends React.Component {
   componentDidMount() {
+    const { getSecretWord } = this.props;
     getSecretWord();
   }
 
@@ -21,13 +23,14 @@ class App extends React.Component {
         <h1>Jotto</h1>
         <Congrats success={success} />
         <br />
+        <InputComp />
         <GuessedWord guessedWords={guessedWords} />
       </div>
     );
   }
 }
 
-App.propTypes = {
+UnconnectedApp.propTypes = {
   success: PropTypes.bool,
   guessedWords: PropTypes.arrayOf(
     PropTypes.shape({
@@ -35,13 +38,15 @@ App.propTypes = {
       letterMatchCount: PropTypes.number,
     }),
   ),
+  getSecretWord: PropTypes.func,
 };
-App.defaultProps = {
+UnconnectedApp.defaultProps = {
   success: false,
   guessedWords: [{ guessWord: 'Party', letterMatchCount: 5 }],
+  getSecretWord: () => { },
 };
 const mapStateToProps = (state) => {
   const { success, guessedWords, secretWord } = state;
   return { success, guessedWords, secretWord };
 };
-export default connect(mapStateToProps, { getSecretWord })(App);
+export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp);

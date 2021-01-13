@@ -3,7 +3,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { storeFactory } from './test/testUtils';
-import App from './App';
+import App, { UnconnectedApp } from './App';
 
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
@@ -36,5 +36,26 @@ describe('Redux Props Test: App Component', () => {
     wrapper = setup();
     const getSecretWordPropFunc = wrapper.instance().props.getSecretWord;
     expect(getSecretWordPropFunc).toBeInstanceOf(Function);
+  });
+});
+
+describe('Unconnected Component', () => {
+  test('should run getSecretWord on App mount', () => {
+    const getSecretWordMock = jest.fn();
+    const props = {
+      success: false,
+      secretWord: 'Party',
+      guessedWords: [{ guessedWord: 'Party', letterMatchCount: 5 }],
+      getSecretWord: getSecretWordMock,
+    };
+
+    // Setup App Component with getSecretWordMock() as a prop getSecretWord
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    const wrapper = shallow(<UnconnectedApp {...props} />);
+
+    // Call the componentDidMount()
+    wrapper.instance().componentDidMount();
+    const propsCalledCount = getSecretWordMock.mock.calls.length;
+    expect(propsCalledCount).toBeGreaterThanOrEqual(1);
   });
 });
