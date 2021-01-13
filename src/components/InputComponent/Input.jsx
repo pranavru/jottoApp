@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -12,9 +13,29 @@ import { guessWord } from '../../actions';
 const mapStateToProps = ({ success }) => ({ success });
 
 export class UnconnectedInputComp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentGuess: null,
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    // eslint-disable-next-line no-shadow
+    const { guessWord } = this.props;
+    const { currentGuess } = this.state;
+    if (currentGuess && currentGuess.length > 0) {
+      guessWord(currentGuess);
+    }
+  }
+
   render() {
     // eslint-disable-next-line no-shadow
-    const { success, guessWord } = this.props;
+    const { success } = this.props;
+    const { currentGuess } = this.state;
     const contents = success ? null : (
       <form
         action=""
@@ -26,17 +47,20 @@ export class UnconnectedInputComp extends Component {
           data-test="component-input-box"
           className="mb-2 mx-sm-3"
           placeholder="enter your guess"
+          value={currentGuess}
+          onChange={(event) => this.setState({ currentGuess: event.target.value })}
         />
         <button
           type="submit"
           data-test="component-submit-button"
           className="btn btn-primary mb-2"
-          onClick={() => guessWord('Party')}
+          onClick={this.handleSubmit}
         >
           Submit
         </button>
       </form>
     );
+
     return (
       <div data-test="component-input">
         {contents}

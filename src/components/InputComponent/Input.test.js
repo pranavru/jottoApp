@@ -54,37 +54,52 @@ describe('Input Component: ', () => {
       expect(component.length).toBe(0);
     });
   });
-});
 
-describe('redux props', () => {
-  test('should have success piece of state as props', () => {
-    const success = true;
-    const wrapper = setup({ success }); // initialState = {success: true}
-    const successProp = wrapper.instance().props.success;
-    expect(successProp).toBe(success);
+  describe('redux props', () => {
+    test('should have success piece of state as props', () => {
+      const success = true;
+      const wrapper = setup({ success }); // initialState = {success: true}
+      const successProp = wrapper.instance().props.success;
+      expect(successProp).toBe(success);
+    });
+    test('should have guessWord action creator as a functional prop', () => {
+      const wrapper = setup();
+      const props = wrapper.instance().props.guessWord;
+      expect(props).toBeInstanceOf(Function);
+    });
   });
-  test('should have guessWord action creator as a functional prop', () => {
-    const wrapper = setup();
-    const props = wrapper.instance().props.guessWord;
-    expect(props).toBeInstanceOf(Function);
-  });
-});
-describe('guessWord action creator calls', () => {
-  test('should invoke action props (guessWord) when the Submit Button is clicked', () => {
-    const guessWordMock = jest.fn();
-    const props = {
+
+  describe('guessWord action creator calls', () => {
+    let guessWordMock;
+    let wrapper;
+    let props = {
       success: false,
-      guessWord: guessWordMock,
+      guessedWords: [],
+      guessWord: () => { },
     };
+    const guessedWord = 'train';
 
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    const wrapper = shallow(<UnconnectedInputComp {...props} />);
+    beforeEach(() => {
+      guessWordMock = jest.fn();
+      props = { ...props, guessWord: guessWordMock(guessedWord) };
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      wrapper = shallow(<UnconnectedInputComp {...props} />);
 
-    // Find the submit button from the DOM and perform click functionality
-    findByTestAttr(wrapper, 'component-submit-button').simulate('click');
+      // Added user input to the input field
+      wrapper.setState({ currentGuess: guessedWord });
 
-    // Look for the mock Function call count
-    const guessWordMockCallCount = guessWordMock.mock.calls.length;
-    expect(guessWordMockCallCount).toBeGreaterThan(0);
+      // Find the submit button from the DOM and perform click functionality
+      findByTestAttr(wrapper, 'component-submit-button').simulate('click', { preventDefault() { } });
+    });
+
+    test('should invoke action props (guessWord) when the Submit Button is clicked', () => {
+      // Look for the mock Function call count
+      const guessWordMockCallCount = guessWordMock.mock.calls.length;
+      expect(guessWordMockCallCount).toBe(1);
+    });
+    test('should call guessWord action with an input value', () => {
+      const guessWordArgAsInputValue = guessWordMock.mock.calls[0][0];
+      expect(guessWordArgAsInputValue).toBe(guessedWord);
+    });
   });
 });
