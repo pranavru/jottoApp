@@ -24,7 +24,7 @@ describe('getSecretWord action creator', () => {
       request.respondWith({
         status: 200,
         statusText: 'OK',
-        response: { secretWord },
+        response: secretWord,
       });
     });
 

@@ -101,5 +101,6 @@ describe('Input Component: ', () => {
       const guessWordArgAsInputValue = guessWordMock.mock.calls[0][0];
       expect(guessWordArgAsInputValue).toBe(guessedWord);
     });
+    test('should empty the currentGuess input when the submit is pressed', () => expect(wrapper.state('currentGuess')).toBe(''));
   });
 });

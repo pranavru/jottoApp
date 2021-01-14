@@ -22,7 +22,7 @@ export const guessWord = (guessedWord) => (dispatch, getState) => {
     type: actionTypes.GUESS_WORD,
     payload: { guessedWord, letterMatchCount: guessedLettersCount },
   });
-  if (guessedWord.length === guessedLettersCount) {
+  if (secretWord.length === guessedLettersCount) {
     dispatch({
       type: actionTypes.CORRECT_GUESS,
     });
@@ -30,14 +30,15 @@ export const guessWord = (guessedWord) => (dispatch, getState) => {
 };
 
 // Mock axios request to get a random secret word from the server
-export const getSecretWord = () => (dispatch) => axios.get('https://localhost:3030/')
-  .then((response) => response.data)
-  .then((response) => dispatch(
-    {
-      type: actionTypes.SET_SECRET_WORD,
-      payload: response.secretWord,
-    },
-  ));
+export const getSecretWord = () => (dispatch) => axios.get('http://localhost:3030/')
+  .then((response) => {
+    dispatch(
+      {
+        type: actionTypes.SET_SECRET_WORD,
+        payload: response.data || 'Party',
+      },
+    );
+  });
 
 /**
  * @function

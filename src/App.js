@@ -18,10 +18,17 @@ export class UnconnectedApp extends React.Component {
   }
 
   render() {
-    const { success, guessedWords } = this.props;
+    const { success, guessedWords, secretWord } = this.props;
     return (
       <div className="App">
         <h1>Jotto</h1>
+        {secretWord && !success
+          ? (
+            <code>
+              {`The secret word has length of ${secretWord.length}`}
+            </code>
+          )
+          : <></>}
         <Congrats success={success} />
         <br />
         <InputComp />
@@ -40,11 +47,13 @@ UnconnectedApp.propTypes = {
     }),
   ),
   getSecretWord: PropTypes.func,
+  secretWord: PropTypes.string,
 };
 UnconnectedApp.defaultProps = {
   success: false,
-  guessedWords: [{ guessWord: 'Party', letterMatchCount: 5 }],
+  guessedWords: [{ guessWord: 'train', letterMatchCount: 3 }],
   getSecretWord: () => { },
+  secretWord: 'Party',
 };
 const mapStateToProps = (state) => {
   const { success, guessedWords, secretWord } = state;
