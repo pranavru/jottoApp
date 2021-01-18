@@ -59,6 +59,13 @@ export class UnconnectedInputComp extends Component {
         >
           Submit
         </button>
+        <button
+          type="button"
+          data-test="component-submit-button"
+          className="btn btn-danger ml-1 mb-2"
+        >
+          Give Up
+        </button>
       </form>
     );
 

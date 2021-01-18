@@ -8,7 +8,8 @@ import GuessedWord from './components/GuessedWordComponent/GuessedWords';
 import InputComp from './components/InputComponent/Input';
 
 import './App.css';
-import { getSecretWord } from './actions';
+import { getSecretWord, reloadWebPage } from './actions';
+import GiveUp from './components/GiveUpButtonComponent/GiveUp';
 
 export class UnconnectedApp extends React.Component {
   componentDidMount() {
@@ -18,21 +19,32 @@ export class UnconnectedApp extends React.Component {
   }
 
   render() {
-    const { success, guessedWords, secretWord } = this.props;
-    return (
-      <div className="App">
+    const {
+      // eslint-disable-next-line no-shadow
+      success, guessedWords, secretWord, reloadWebPage, giveUpGuess,
+    } = this.props;
+    const contents = (
+      <>
         <h1>Jotto</h1>
-        {secretWord && !success
-          ? (
-            <code>
-              {`The secret word has length of ${secretWord.length}`}
-            </code>
-          )
-          : <></>}
-        <Congrats success={success} />
+        {
+          secretWord && !success
+            ? (
+              <code>
+                {`The secret word has length of ${secretWord.length}`}
+              </code>
+            )
+            : <></>
+        }
+        <GiveUp successsecretWord={secretWord} giveUpGuess={giveUpGuess} />
+        <Congrats success={success} getSecretWord={reloadWebPage} />
         <br />
         <InputComp />
         <GuessedWord guessedWords={guessedWords} />
+      </>
+    );
+    return (
+      <div className="App">
+        {contents}
       </div>
     );
   }
@@ -40,6 +52,7 @@ export class UnconnectedApp extends React.Component {
 
 UnconnectedApp.propTypes = {
   success: PropTypes.bool,
+  giveUpGuess: PropTypes.bool,
   guessedWords: PropTypes.arrayOf(
     PropTypes.shape({
       guessWord: PropTypes.string,
@@ -47,16 +60,28 @@ UnconnectedApp.propTypes = {
     }),
   ),
   getSecretWord: PropTypes.func,
+  reloadWebPage: PropTypes.func,
   secretWord: PropTypes.string,
 };
 UnconnectedApp.defaultProps = {
   success: false,
+  giveUpGuess: false,
   guessedWords: [{ guessWord: 'train', letterMatchCount: 3 }],
+  reloadWebPage: () => { },
   getSecretWord: () => { },
   secretWord: 'Party',
 };
 const mapStateToProps = (state) => {
-  const { success, guessedWords, secretWord } = state;
-  return { success, guessedWords, secretWord };
+  const {
+    success, guessedWords, secretWord, giveUpGuess,
+  } = state;
+  return {
+    success, guessedWords, secretWord, giveUpGuess,
+  };
 };
-export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp);
+
+const actions = {
+  getSecretWord,
+  reloadWebPage,
+};
+export default connect(mapStateToProps, actions)(UnconnectedApp);

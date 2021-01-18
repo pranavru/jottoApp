@@ -36,6 +36,14 @@ describe('if there are no words guessed', () => {
     const instruction = findByTestAttr(wrapper, 'guessed-word-instruction');
     expect(instruction.text().length).toBeGreaterThan(0);
   });
+  test('should render guessed words count', () => {
+    const component = findByTestAttr(wrapper, 'guessed-words-count');
+    expect(component.length).toBe(1);
+  });
+  test('should render guessed words count to 0 initally', () => {
+    const component = findByTestAttr(wrapper, 'guessed-words-count');
+    expect(component.text()).toBe('Total guessed words: 0');
+  });
 });
 
 describe('if there are words guessed', () => {
@@ -57,5 +65,9 @@ describe('if there are words guessed', () => {
   test('should return the correct number of guessed words', () => {
     const guessedWordsNodes = findByTestAttr(wrapper, 'guessed-word');
     expect(guessedWordsNodes.length).toBe(guessedWords.length);
+  });
+  test('should render guessed words count to 3', () => {
+    const component = findByTestAttr(wrapper, 'guessed-words-count');
+    expect(component.text()).toBe('Total guessed words: 3');
   });
 });

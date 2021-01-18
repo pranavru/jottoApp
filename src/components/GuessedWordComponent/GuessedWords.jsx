@@ -42,6 +42,9 @@ const GuessedWord = ({ guessedWords }) => {
   return (
     <div data-test="component-guessed-words">
       {content}
+      <div data-test="guessed-words-count">
+        {`Total guessed words: ${guessedWords.length}`}
+      </div>
     </div>
   );
 };

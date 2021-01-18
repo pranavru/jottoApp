@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func } from 'prop-types';
+import NewWordButton from '../NewWordComponent/NewWord';
 
 /**
  * Functional react component for congratulatory message.
@@ -7,14 +8,23 @@ import PropTypes from 'prop-types';
  * @param {object} props - React props
  * @returns {JSX.Element} - Renderend Component (or null if `success` prop is false)
  */
-const Congrats = ({ success }) => (success ? (
+
+const Congrats = ({ success, getSecretWord }) => (success ? (
   <div data-test="component-congrats" className="container">
     <span data-test="congrats-message" className="alert alert-success">
       Congratulations! You guessed the word!
     </span>
+    <div className="mt-3">
+      <NewWordButton success reloadWebPage={getSecretWord} />
+    </div>
   </div>
 ) : (<div data-test="component-congrats" />));
 Congrats.propTypes = {
-  success: PropTypes.bool.isRequired,
+  success: bool,
+  getSecretWord: func,
+};
+Congrats.defaultProps = {
+  success: false,
+  getSecretWord: () => { },
 };
 export default Congrats;

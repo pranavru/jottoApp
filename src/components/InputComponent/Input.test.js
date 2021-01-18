@@ -7,6 +7,12 @@ import { shallow } from 'enzyme';
 import { findByTestAttr, storeFactory } from '../../test/testUtils';
 import InputComp, { UnconnectedInputComp } from './Input';
 
+/**
+ * Initial function to render the component using Enzyme
+ * @function setup
+ * @param  {Object} initialState={} - Inital State of the store
+ * @returns {ShallowWrapper} wrapper
+ */
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
   const wrapper = shallow(<InputComp store={store} />).dive().dive();
