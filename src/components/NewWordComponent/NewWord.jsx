@@ -2,9 +2,9 @@ import React from 'react';
 import { bool, func } from 'prop-types';
 
 // eslint-disable-next-line no-shadow
-const NewWordButton = ({ success, reloadWebPage }) => (
+const NewWordButton = ({ display, reloadWebPage }) => (
   <div data-test="component-new-word">
-    {success
+    {display
       ? (
         <button
           type="button"
@@ -20,11 +20,11 @@ const NewWordButton = ({ success, reloadWebPage }) => (
   </div>
 );
 NewWordButton.propTypes = {
-  success: bool,
+  display: bool,
   reloadWebPage: func,
 };
 NewWordButton.defaultProps = {
-  success: false,
+  display: false,
   reloadWebPage: () => { },
 };
 

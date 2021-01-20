@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { guessWord } from '../../actions';
+import { giveUpGuess, guessWord } from '../../actions';
 
 /**
  * @function mapStateToProps
@@ -35,7 +35,7 @@ export class UnconnectedInputComp extends Component {
 
   render() {
     // eslint-disable-next-line no-shadow
-    const { success } = this.props;
+    const { success, giveUpGuess } = this.props;
     const { currentGuess } = this.state;
     const contents = success ? null : (
       <form
@@ -61,8 +61,9 @@ export class UnconnectedInputComp extends Component {
         </button>
         <button
           type="button"
-          data-test="component-submit-button"
+          data-test="give-up-button"
           className="btn btn-danger ml-1 mb-2"
+          onClick={giveUpGuess}
         >
           Give Up
         </button>
@@ -79,10 +80,15 @@ export class UnconnectedInputComp extends Component {
 UnconnectedInputComp.propTypes = {
   success: PropTypes.bool,
   guessWord: PropTypes.func,
+  giveUpGuess: PropTypes.func,
 };
 UnconnectedInputComp.defaultProps = {
   success: false,
   guessWord: () => { },
+  giveUpGuess: () => { },
 };
-
-export default connect(mapStateToProps, { guessWord })(UnconnectedInputComp);
+const actions = {
+  guessWord,
+  giveUpGuess,
+};
+export default connect(mapStateToProps, actions)(UnconnectedInputComp);

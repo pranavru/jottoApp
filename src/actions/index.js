@@ -73,7 +73,7 @@ export const reloadWebPage = () => (dispatch) => {
   return loadSecretWord(dispatch);
 };
 
-export const giveUpGuess = (dispatch) => {
+export const giveUpGuess = () => (dispatch) => {
   dispatch({ type: actionTypes.GIVEUP_GUESS });
   return loadSecretWord(dispatch);
 };

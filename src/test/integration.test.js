@@ -8,8 +8,7 @@ describe('guessWord action dispatcher', () => {
 
   describe('no guessed Words', () => {
     let store;
-
-    const initialState = { secretWord };
+    const initialState = { secretWord, giveUpGuess: false };
     beforeEach(() => {
       store = storeFactory(initialState);
     });
@@ -69,6 +68,7 @@ describe('guessWord action dispatcher', () => {
         success: false,
         guessedWords: [...guessedWords, { guessedWord: unsuccessfulGuess, letterMatchCount: 3 }],
         secretWord,
+        giveUpGuess: false,
       };
       expect(newState).toEqual(expectedState);
     });
@@ -80,6 +80,7 @@ describe('guessWord action dispatcher', () => {
         secretWord,
         success: true,
         guessedWords: [...guessedWords, { guessedWord: secretWord, letterMatchCount: 5 }],
+        giveUpGuess: false,
       };
       expect(newState).toEqual(expectedState);
     });

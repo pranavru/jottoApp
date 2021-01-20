@@ -10,6 +10,8 @@ import InputComp from './components/InputComponent/Input';
 import './App.css';
 import { getSecretWord, reloadWebPage } from './actions';
 import GiveUp from './components/GiveUpButtonComponent/GiveUp';
+import NewWordButton from './components/NewWordComponent/NewWord';
+import SecretWordLength from './components/SecretWordLength/SecretWordLength';
 
 export class UnconnectedApp extends React.Component {
   componentDidMount() {
@@ -25,25 +27,19 @@ export class UnconnectedApp extends React.Component {
     } = this.props;
     const contents = (
       <>
-        <h1>Jotto</h1>
-        {
-          secretWord && !success
-            ? (
-              <code>
-                {`The secret word has length of ${secretWord.length}`}
-              </code>
-            )
-            : <></>
-        }
-        <GiveUp successsecretWord={secretWord} giveUpGuess={giveUpGuess} />
-        <Congrats success={success} getSecretWord={reloadWebPage} />
-        <br />
+        <SecretWordLength secretWord={secretWord} success={success} giveUpGuess={giveUpGuess} />
+        <Congrats success={success} />
+        <GiveUp giveUpGuess={giveUpGuess} secretWord={secretWord} />
+        <div className="mt-3 mb-3">
+          <NewWordButton display={success || giveUpGuess} reloadWebPage={reloadWebPage} />
+        </div>
         <InputComp />
         <GuessedWord guessedWords={guessedWords} />
       </>
     );
     return (
       <div className="App">
+        <h1>Jotto</h1>
         {contents}
       </div>
     );

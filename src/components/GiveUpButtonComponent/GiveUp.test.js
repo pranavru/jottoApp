@@ -1,20 +1,17 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-undef */
 import React from 'react';
 import { shallow } from 'enzyme';
 import GiveUp from './GiveUp';
-import { findByTestAttr, storeFactory } from '../../test/testUtils';
+import { findByTestAttr } from '../../test/testUtils';
 
 describe('Giveup component:', () => {
-  // eslint-disable-next-line react/jsx-filename-extension
-  const setup = (initalState = {}) => {
-    const store = storeFactory(initalState);
-    // eslint-disable-next-line react/jsx-filename-extension
-    return shallow(<GiveUp store={store} />).dive().dive();
-  };
+  const setup = (initalState = {}) => shallow(<GiveUp {...initalState} />);
   describe('render component', () => {
     let wrapper;
+    const initialState = { giveUpGuess: true, secretWord: 'Party' };
     beforeEach(() => {
-      const initialState = { giveUpGuess: true, secretWord: 'Party' };
       wrapper = setup(initialState);
     });
     test('should render component without errors', () => {
@@ -27,7 +24,7 @@ describe('Giveup component:', () => {
     });
     test('should not render button if giveUpGuess piece of state is true', () => {
       const component = findByTestAttr(wrapper, 'message-give-up-button');
-      expect(component.text()).toBe('The secret word was Party\nBetter luck next time!');
+      expect(component.text()).toBe(`The secret word was ${initialState.secretWord}.\nBetter luck next time!`);
     });
     test('should not render button if giveUpGuess piece of state is false', () => {
       wrapper = setup({ giveUpGuess: false, secretWord: '' });
