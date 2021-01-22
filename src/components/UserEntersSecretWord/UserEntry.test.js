@@ -59,7 +59,7 @@ describe('User Entry:', () => {
       expect(submitButtonMock.mock.calls.length).toBe(1);
     });
     test(`Submit button has passed a parameter with value ${userInput}`, () => {
-      expect(submitButtonMock.mock.calls[0][0]).toEqual({ value: userInput });
+      expect(submitButtonMock.mock.calls[0][0]).toEqual(userInput);
     });
   });
 });

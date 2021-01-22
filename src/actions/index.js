@@ -85,4 +85,8 @@ export const setUserEnteredSecretWord = (secretWord) => (dispatch) => {
   dispatch({ type: actionTypes.USER_ENTERED });
 };
 
+export const setUserSecretWordEntering = () => (dispatch) => dispatch(
+  { type: actionTypes.USER_IS_ENTERING },
+);
+
 export default actionTypes;

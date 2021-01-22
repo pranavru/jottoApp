@@ -12,7 +12,7 @@ class UserEntry extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.formAction(this.inputRef.current);
+    this.props.formAction(this.inputRef.current.value);
   }
 
   render() {
@@ -30,7 +30,7 @@ class UserEntry extends React.Component {
             type="submit"
             data-test="Submit-Btn-User-Input-SSW"
             className="btn-primary"
-            onClick={this.handleSubmit}
+            onClick={(e) => this.handleSubmit(e)}
           >
             Submit
           </button>

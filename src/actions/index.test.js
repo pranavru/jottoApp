@@ -34,3 +34,13 @@ describe('getSecretWord action creator', () => {
     });
   });
 });
+
+// describe('reload Web Page', () => {
+//   test('should reset the game and return null', () => {
+//     const store = storeFactory();
+//     return store.dispatch(reloadWebPage()).then(() => {
+//       const newState = store.getState();
+//       expect(newState).toBe(null);
+//     });
+//   });
+// });
