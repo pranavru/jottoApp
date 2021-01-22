@@ -24,7 +24,7 @@ describe('Giveup component:', () => {
     });
     test('should not render button if giveUpGuess piece of state is true', () => {
       const component = findByTestAttr(wrapper, 'message-give-up-button');
-      expect(component.text()).toBe(`The secret word was ${initialState.secretWord}.\nBetter luck next time!`);
+      expect(component.text()).toBe(`The secret word was ${initialState.secretWord}. Better luck next time!`);
     });
     test('should not render button if giveUpGuess piece of state is false', () => {
       wrapper = setup({ giveUpGuess: false, secretWord: '' });

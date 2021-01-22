@@ -27,7 +27,14 @@ export class UnconnectedApp extends React.Component {
     } = this.props;
     const contents = (
       <>
-        <SecretWordLength secretWord={secretWord} success={success} giveUpGuess={giveUpGuess} />
+        {secretWord
+          && (
+            <SecretWordLength
+              secretWord={secretWord}
+              success={success}
+              giveUpGuess={giveUpGuess}
+            />
+          )}
         <Congrats success={success} />
         <GiveUp giveUpGuess={giveUpGuess} secretWord={secretWord} />
         <div className="mt-3 mb-3">

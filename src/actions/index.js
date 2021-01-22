@@ -9,6 +9,8 @@ const actionTypes = {
   GUESS_WORD: 'GUESS_WORD',
   SET_SECRET_WORD: 'SET_SECRET_WORD',
   GIVEUP_GUESS: 'GIVEUP_GUESS',
+  USER_IS_ENTERING: 'USER_IS_ENTERING',
+  USER_ENTERED: 'USER_ENTERED',
 };
 
 /**
@@ -76,6 +78,11 @@ export const reloadWebPage = () => (dispatch) => {
 export const giveUpGuess = () => (dispatch) => {
   dispatch({ type: actionTypes.GIVEUP_GUESS });
   return loadSecretWord(dispatch);
+};
+
+export const setUserEnteredSecretWord = (secretWord) => (dispatch) => {
+  dispatch({ type: actionTypes.SET_SECRET_WORD, payload: secretWord });
+  dispatch({ type: actionTypes.USER_ENTERED });
 };
 
 export default actionTypes;

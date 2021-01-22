@@ -6,7 +6,13 @@ const GiveUp = ({ giveUpGuess, secretWord }) => {
     ? (
       <div data-test="button-give-up-button" className="container">
         <span data-test="message-give-up-button" className="alert alert-danger">
-          {`The secret word was ${secretWord}.\nBetter luck next time!`}
+          The secret word was
+          {' '}
+          <b>
+            {secretWord}
+          </b>
+          {'. '}
+          Better luck next time!
         </span>
       </div>
     )
