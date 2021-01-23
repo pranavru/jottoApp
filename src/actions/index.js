@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import axios from 'axios';
 
 import { getLetterMatchCount } from '../helpers/index';
@@ -11,6 +10,7 @@ const actionTypes = {
   GIVEUP_GUESS: 'GIVEUP_GUESS',
   USER_IS_ENTERING: 'USER_IS_ENTERING',
   USER_ENTERED: 'USER_ENTERED',
+  SERVER_ERROR: 'SERVER_ERROR',
 };
 
 /**
@@ -27,7 +27,7 @@ export const guessWord = (guessedWord) => (dispatch, getState) => {
     type: actionTypes.GUESS_WORD,
     payload: { guessedWord, letterMatchCount: guessedLettersCount },
   });
-  if (secretWord.length === guessedLettersCount) {
+  if (secretWord === guessedWord) {
     dispatch({
       type: actionTypes.CORRECT_GUESS,
     });
@@ -49,7 +49,8 @@ const loadSecretWord = (dispatch) => axios.get('http://localhost:3030/')
         payload: response.data || 'Party',
       },
     );
-  });
+  })
+  .catch(() => ({ type: actionTypes.SERVER_ERROR }));
 
 // Axios request to get a random secret word from the server
 export const getSecretWord = () => loadSecretWord;
@@ -66,7 +67,7 @@ export const correctGuess = () => ({ type: actionTypes.CORRECT_GUESS });
  * It sets the success status to false leaving the guessedWords as it is.
  * Alternatively: It can also be approached with reloading the whole website.
  *  by returning window.location.reload.
- * @function loadSecretWord
+ * @function reloadWebPage
  * @param {*} dispatch - Redux thunk dispatcher object function
  * @returns {object} - Redux thunk dispatch function
  */
@@ -75,16 +76,35 @@ export const reloadWebPage = () => (dispatch) => {
   return loadSecretWord(dispatch);
 };
 
+/**
+ * It sets the giveUpGuess piece of state to true when giveUp button is clicked.
+ * @function giveUpGuess
+ * @param {*} dispatch - Redux thunk dispatcher object function
+ * @returns {object} - Redux thunk dispatch function
+ */
 export const giveUpGuess = () => (dispatch) => {
   dispatch({ type: actionTypes.GIVEUP_GUESS });
   return loadSecretWord(dispatch);
 };
 
+/**
+ * It sets the User Entered Secret Word to the secretWord piece of state.
+ * It also sets the USER_ENTERED action indicating the user has completed filling the input.
+ * @function setUserEnteredSecretWord
+ * @param {bool} secretWord
+ * @param  {actionTypes.SET_SECRET_WORD} =>{dispatch({type - Redux thunk dispatcher object function
+ * @returns {object} - Redux thunk dispatch function
+ */
 export const setUserEnteredSecretWord = (secretWord) => (dispatch) => {
   dispatch({ type: actionTypes.SET_SECRET_WORD, payload: secretWord });
   dispatch({ type: actionTypes.USER_ENTERED });
 };
 
+/**
+ * @function setUserSecretWordEntering
+ * @param  {} =>(dispatch - Redux thunk dispatcher object function.
+ * @returns - Redux thunk dispatcher function - setting the userInput to 'is_entering'
+ */
 export const setUserSecretWordEntering = () => (dispatch) => dispatch(
   { type: actionTypes.USER_IS_ENTERING },
 );

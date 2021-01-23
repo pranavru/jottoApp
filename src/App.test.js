@@ -30,12 +30,34 @@ describe('Redux Props Test: App Component', () => {
     const guessedWords = [{ guessedWord: 'Party', letterMatchCount: 5 }];
     wrapper = setup({ ...initialState, guessedWords });
     const guessedWordsProps = wrapper.instance().props.guessedWords;
-    expect(guessedWordsProps).toBe(guessedWordsProps);
+    expect(guessedWordsProps).toBe(guessedWords);
   });
-  test('should have secret Keyword action creator as a prop method', () => {
+  test('should have userInput based on user interaction as a piece of state', () => {
+    const userInput = null;
+    wrapper = setup({ ...initialState, userInput });
+    const userInputProps = wrapper.instance().props.userInput;
+    expect(userInputProps).toBe(userInput);
+  });
+  test('should have serverError based on user interaction as a piece of state', () => {
+    const serverError = null;
+    wrapper = setup({ ...initialState, serverError });
+    const serverErrorProps = wrapper.instance().props.serverError;
+    expect(serverErrorProps).toBe(serverError);
+  });
+  test('should have reload web page action creator as a prop method', () => {
     wrapper = setup();
-    const getSecretWordPropFunc = wrapper.instance().props.getSecretWord;
-    expect(getSecretWordPropFunc).toBeInstanceOf(Function);
+    const reloadWebPagePropFunc = wrapper.instance().props.reloadWebPage;
+    expect(reloadWebPagePropFunc).toBeInstanceOf(Function);
+  });
+  test('should have set users Input secret Keyword action creator as a prop method', () => {
+    wrapper = setup();
+    const setUserEnteredSecretWordPropFunc = wrapper.instance().props.setUserEnteredSecretWord;
+    expect(setUserEnteredSecretWordPropFunc).toBeInstanceOf(Function);
+  });
+  test('should have set users Input as entering action creator as a prop method', () => {
+    wrapper = setup();
+    const setUserSecretWordEnteringPropFunc = wrapper.instance().props.setUserSecretWordEntering;
+    expect(setUserSecretWordEnteringPropFunc).toBeInstanceOf(Function);
   });
 });
 
@@ -59,3 +81,27 @@ describe('Unconnected Component', () => {
     expect(propsCalledCount).toBeGreaterThanOrEqual(1);
   });
 });
+
+/**
+ * describe('Render Error Component', () => {
+  let wrapper;
+  beforeEach(() => {
+    const initialState = { serverError: true, userInput: 'is_entering' };
+    wrapper = setup(initialState);
+  });
+  test('should render error component if serverError piece of state is true', () => {
+    const component = findByTestAttr(wrapper, 'component-error-message-div');
+    console.log(component.debug());
+    expect(component.text().length).toBeGreaterThan(0);
+  });
+  test('should render UserInput Form for entering secret word', () => {
+    const component = findByTestAttr(wrapper, 'component-User-Input-SSW');
+    expect(component.text().length).toBeGreaterThan(0);
+  });
+  test('should ', () => {
+
+  })
+
+});
+
+ */

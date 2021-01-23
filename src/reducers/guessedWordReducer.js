@@ -1,6 +1,6 @@
 import actionTypes from '../actions';
 /**
- * @function successReducer
+ * @function guessedWordReducer
  * @param  {boolean} state - current success state. if undefined then default is set to false.
  * @param  {object} action - Action to be reduced.
  * @returns {boolean} - New success state.
