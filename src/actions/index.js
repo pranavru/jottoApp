@@ -50,7 +50,7 @@ const loadSecretWord = (dispatch) => axios.get('http://localhost:3030/')
       },
     );
   })
-  .catch(() => ({ type: actionTypes.SERVER_ERROR }));
+  .catch(() => { dispatch({ type: actionTypes.SERVER_ERROR }); });
 
 // Axios request to get a random secret word from the server
 export const getSecretWord = () => loadSecretWord;
