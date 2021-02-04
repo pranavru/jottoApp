@@ -1,4 +1,5 @@
 {
+  "homepage": "",
   "name": "jottotestapp",
   "version": "0.1.0",
   "private": true,
@@ -76,7 +77,9 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "coverage": "node scripts/test.js --coverage",
-    "flow": "flow"
+    "flow": "flow",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -110,6 +113,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "flow": "^0.2.3",
     "flow-bin": "^0.141.0",
+    "gh-pages": "^3.1.0",
     "jest-enzyme": "^7.1.2",
     "moxios": "^0.4.0"
   },
