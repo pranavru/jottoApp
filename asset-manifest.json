@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/jottoApp/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/jottoApp/static/js/main.372c473e.chunk.js",
+    "main.js.map": "/jottoApp/static/js/main.372c473e.chunk.js.map",
+    "runtime-main.js": "/jottoApp/static/js/runtime-main.d129fea5.js",
+    "runtime-main.js.map": "/jottoApp/static/js/runtime-main.d129fea5.js.map",
+    "static/css/2.ae9f1eb3.chunk.css": "/jottoApp/static/css/2.ae9f1eb3.chunk.css",
+    "static/js/2.9a612566.chunk.js": "/jottoApp/static/js/2.9a612566.chunk.js",
+    "static/js/2.9a612566.chunk.js.map": "/jottoApp/static/js/2.9a612566.chunk.js.map",
+    "static/js/3.1e0e9f74.chunk.js": "/jottoApp/static/js/3.1e0e9f74.chunk.js",
+    "static/js/3.1e0e9f74.chunk.js.map": "/jottoApp/static/js/3.1e0e9f74.chunk.js.map",
+    "index.html": "/jottoApp/index.html",
+    "static/css/2.ae9f1eb3.chunk.css.map": "/jottoApp/static/css/2.ae9f1eb3.chunk.css.map",
+    "static/css/main.8c8b27cf.chunk.css.map": "/jottoApp/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.9a612566.chunk.js.LICENSE.txt": "/jottoApp/static/js/2.9a612566.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d129fea5.js",
+    "static/css/2.ae9f1eb3.chunk.css",
+    "static/js/2.9a612566.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.372c473e.chunk.js"
+  ]
+}
